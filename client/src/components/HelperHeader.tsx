@@ -1,4 +1,4 @@
-// 1:03 - MERN Stack Project - Create Online HTML, CSS, JavaScript Compiler like CodePen | Full Stack Project - Code Soni
+// 1:32:40 - MERN Stack Project - Create Online HTML, CSS, JavaScript Compiler like CodePen | Full Stack Project - Code Soni
 
 import axios from "axios";
 import { Code, Copy, Loader2, Save, Share2 } from "lucide-react";
@@ -7,6 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 
+import {
+  CompilerSliceStateType,
+  updateCurrentLanguage,
+} from "@/redux/slices/compilerSlice";
+import { RootState } from "@/redux/store";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -22,11 +27,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { RootState } from "@/redux/store";
-import {
-  CompilerSliceStateType,
-  updateCurrentLanguage,
-} from "@/redux/slices/compilerSlice";
 
 export const HelperHeader = () => {
   const [saveLoading, setSaveLoading] = useState<boolean>(false);
@@ -71,6 +71,7 @@ export const HelperHeader = () => {
           className="flex justify-center items-center gap-1"
           variant="success"
           disabled={saveLoading}
+          onClick={handleSaveCode}
         >
           {saveLoading ? (
             <>

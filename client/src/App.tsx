@@ -16,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/compiler" element={<Compiler />} />
+          <Route path="/compiler/:urlId" element={<Compiler />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </ThemeProvider>

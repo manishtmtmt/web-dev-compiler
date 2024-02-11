@@ -12,6 +12,7 @@ import {
   updateCurrentLanguage,
 } from "@/redux/slices/compilerSlice";
 import { RootState } from "@/redux/store";
+import { handleError } from "@/utils/handleError";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -35,9 +36,11 @@ export const HelperHeader = () => {
   const { urlId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const fullCode = useSelector(
     (state: RootState) => state.compilerSlice.fullCode
   );
+  
   const currentLanguage = useSelector(
     (state: RootState) => state.compilerSlice.currentLanguage
   );
@@ -45,12 +48,12 @@ export const HelperHeader = () => {
   const handleSaveCode = async () => {
     setSaveLoading(true);
     try {
-      const response = await axios.post("http://localhost:4000/compiler/save", {
+      const response = await axios.post("http://localhost:8000/compiler/save", {
         fullCode: fullCode,
       });
       navigate(`/compiler/${response.data.url}`, { replace: true });
     } catch (error) {
-      //   handleError(error);
+        handleError(error);
     } finally {
       setSaveLoading(false);
     }
